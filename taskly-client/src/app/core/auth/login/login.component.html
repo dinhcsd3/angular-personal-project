@@ -1,31 +1,26 @@
-<div class="min-h-screen flex items-center justify-center bg-neutral-100 dark:bg-neutral-900 px-4">
-    <div class="max-w-md w-full bg-white dark:bg-neutral-800 p-8 rounded-xl shadow-md">
-        <!-- Branding -->
-        <div class="flex items-center justify-center mb-6">
-            <!-- Logo: replace by your logo -->
-            <img src="assets/logo.svg" alt="Taskly Logo" class="w-12 h-12 mr-3">
-            <h1 class="text-3xl font-bold text-primary dark:text-primary-light font-sans">Taskly</h1>
+<div class="min-h-screen flex">
+    <!-- Left Side: Illustration -->
+    <div class="hidden md:flex w-1/2 bg-neutral-100 items-center justify-center">
+        <img src="{{tenantUrl + '/assets/branding/taskly_illustration.svg'}}" alt="Security Illustration"
+            class="max-w-md">
+    </div>
+
+    <!-- Right Side: Login Panel -->
+    <div class="flex flex-col w-full md:w-1/2 justify-center px-8">
+        <!-- Logo -->
+        <div class="flex items-center mb-8">
+            <img src="{{tenantUrl + '/assets/branding/taskly_logo.svg'}}" alt="Taskly Logo" class="w-10 h-10 mr-3">
+            <span class="text-2xl font-bold text-primary font-sans">Taskly</span>
         </div>
 
-        <!-- Heading -->
-        <h2 class="text-xl font-semibold text-neutral-800 dark:text-neutral-100 mb-4 text-center">
-            Welcome! Sign in to continue
-        </h2>
+        <!-- Welcome Text -->
+        <h2 class="text-3xl font-bold mb-2 text-neutral-900">Welcome to Taskly</h2>
+        <p class="text-neutral-600 mb-8">Your Project Collaboration Hub</p>
 
-        <!-- SSO Login Button -->
+        <!-- SSO Button -->
         <button (click)="loginWithSSO()"
-            class="w-full flex items-center justify-center gap-2 bg-primary text-white hover:bg-primary-dark py-3 rounded-lg font-medium transition">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
-                stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M12 11c0-1.104.896-2 2-2h6V5H4v14h8v-4c0-1.104.896-2 2-2h6v-2h-6c-1.104 0-2-.896-2-2z" />
-            </svg>
-            Sign in with SSO
+            class="bg- hover:bg-primary-dark text-white px-6 py-3 rounded-lg font-semibold shadow-md w-full max-w-xs">
+            Sign In with SSO
         </button>
-
-        <!-- Optional: Footer -->
-        <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-6 text-center">
-            © 2025 Taskly. All rights reserved.
-        </p>
     </div>
 </div>

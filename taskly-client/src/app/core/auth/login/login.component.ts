@@ -2,6 +2,7 @@ import { Component, effect, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { KEYCLOAK_EVENT_SIGNAL, KeycloakEventType, typeEventArgs, ReadyArgs, KeycloakService } from 'keycloak-angular';
 import Keycloak from 'keycloak-js';
+import { environments } from '../../../../environments/environments';
 
 @Component({
   selector: 'taskly-login',
@@ -13,6 +14,7 @@ import Keycloak from 'keycloak-js';
 export class LoginComponent {
   
   private _authenticated: boolean = false;
+  public tenantUrl: string = environments.tenantUrl;
 
   keycloakStatus: string | undefined;
   private readonly _keycloak = inject(Keycloak);
