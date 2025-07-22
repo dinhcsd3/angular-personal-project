@@ -1,13 +1,16 @@
 import { Component, effect, inject } from '@angular/core';
 import { Router } from '@angular/router';
-import { KEYCLOAK_EVENT_SIGNAL, KeycloakEventType, typeEventArgs, ReadyArgs, KeycloakService } from 'keycloak-angular';
+import { KEYCLOAK_EVENT_SIGNAL, KeycloakEventType, typeEventArgs, ReadyArgs } from 'keycloak-angular';
 import Keycloak from 'keycloak-js';
 import { environments } from '../../../../environments/environments';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'taskly-login',
   standalone: true,
-  imports: [],
+  imports: [
+    NzButtonModule,
+  ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
