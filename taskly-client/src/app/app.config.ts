@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
+import { ApplicationConfig, LOCALE_ID, inject, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { provideClientHydration } from '@angular/platform-browser';
@@ -7,15 +7,17 @@ import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 import { includeBearerTokenInterceptor } from 'keycloak-angular';
 import { provideKeycloakAngular } from './key-cloak.config';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideNzI18n, en_US } from 'ng-zorro-antd/i18n';
+import { en_US, NZ_I18N, fr_FR, vi_VN } from 'ng-zorro-antd/i18n';
 import { provideNzIcons } from 'ng-zorro-antd/icon';
 import { IconDefinition } from '@ant-design/icons-angular';
+import * as AllIcons from '@ant-design/icons-angular/icons';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-import * as AllIcons from '@ant-design/icons-angular/icons';
+import vi from '@angular/common/locales/vi';
 
 
 registerLocaleData(en);
+registerLocaleData(vi);
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
@@ -28,7 +30,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routes), provideClientHydration(),
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
-    
+
     // provideKeycloakAngular(), // This provider initializes Keycloak Angular with the default configuration
     provideZoneChangeDetection({ eventCoalescing: true }),
 
@@ -36,7 +38,23 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(withInterceptors([includeBearerTokenInterceptor])),
 
     provideAnimations(),
-    provideNzI18n(en_US),
-    provideNzIcons(icons)
+    provideNzIcons(icons),
+    {
+      provide: NZ_I18N,
+      useFactory: () => {
+        const localId = inject(LOCALE_ID);
+        switch (localId) {
+          case 'en':
+            return en_US;
+          /** keep the same with angular.json/i18n/locales configuration **/
+          case 'fr':
+            return fr_FR;
+          case 'vi':
+            return vi_VN;
+          default:
+            return en_US;
+        }
+      }
+    }
   ]
 };
